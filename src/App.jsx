@@ -1,32 +1,34 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MailList from "./components/MailList";
-import Mail from "./pages/Mail"
+import Mail from "./pages/Mail";
 import Nav from "./components/Nav";
 import Sidebar from "./components/Sidebar";
 import "./index.css";
 import SendMail from "./components/SendMail";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import { selectSendMessageIsOpen } from "./features/mailSlice";
+import { Provider } from "react-redux";
 
 function App() {
-
-  const sendMessageIsOpen = useSelector(selectSendMessageIsOpen)
+  const sendMessageIsOpen = useSelector(selectSendMessageIsOpen);
 
   return (
-    <Router>
-      <div className="app">
-        <Nav />
-        <div className="app__body">
-          <Sidebar />
+    <Provider store={store}>
+      <Router>
+        <div className="app">
+          <Nav />
+          <div className="app__body">
+            <Sidebar />
             <Routes>
               <Route path="/" element={<MailList />} />
               <Route path="/mail" element={<Mail />} />
             </Routes>
-        </div>
+          </div>
 
-        {sendMessageIsOpen && <SendMail />}
-      </div>
-    </Router>
+          {sendMessageIsOpen && <SendMail />}
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
