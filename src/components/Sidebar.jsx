@@ -3,24 +3,29 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import InboxIcon from "@mui/icons-material/Inbox";
 import StarIcon from "@mui/icons-material/Star";
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import NearMeIcon from '@mui/icons-material/NearMe';
-import NoteIcon from '@mui/icons-material/Note';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import PersonIcon from '@mui/icons-material/Person';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LabelImportantIcon from "@mui/icons-material/LabelImportant";
+import NearMeIcon from "@mui/icons-material/NearMe";
+import NoteIcon from "@mui/icons-material/Note";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import PersonIcon from "@mui/icons-material/Person";
 import { IconButton } from "@mui/material";
-import DuoIcon from '@mui/icons-material/Duo';
-import PhoneIcon from '@mui/icons-material/Phone';
+import DuoIcon from "@mui/icons-material/Duo";
+import PhoneIcon from "@mui/icons-material/Phone";
 import SidebarOption from "./SidebarOption";
 import "../index.css";
+import { useDispatch } from "react-redux";
+import { openSendMessage } from "../features/mailSlice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+
   return (
     <aside>
       <Button
         className="sidebar__compose"
         startIcon={<AddIcon fontSize="large" />}
+        onClick={() => dispatch(openSendMessage())}
       >
         Compose
       </Button>
