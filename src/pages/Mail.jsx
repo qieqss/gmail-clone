@@ -13,14 +13,23 @@ import {
   ArrowBack,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { deleteDoc, doc } from "firebase/firestore";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectOpenMail } from "../features/mailSlice"
+import { selectOpenMail } from "../features/mailSlice";
+import { db } from "../firebase";
 
 const Mail = () => {
   const navigate = useNavigate();
   const selectedMail = useSelector(selectOpenMail);
+
+  const deleteMail = async () => {
+    const id = selectedMail.id
+    const mailRef = doc(db, "mails", id);
+    await deleteDoc(mailRef);
+    navigate("/");
+  };
 
   return (
     <div className="mail">
@@ -38,7 +47,7 @@ const Mail = () => {
             <Error />
           </IconButton>
 
-          <IconButton>
+          <IconButton onClick={deleteMail}>
             <Delete />
           </IconButton>
 

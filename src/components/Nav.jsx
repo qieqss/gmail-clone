@@ -8,8 +8,21 @@ import Logo from "../assets/logo.png";
 import { ArrowDropDown } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
+import { auth } from "../firebase";
+import { useSelector } from "react-redux";
+import { logout, selectUser } from "../features/userSlice";
+import { useDispatch } from "react-redux";
+import { signOut } from "firebase/auth";
 
-const Header = () => {
+const Nav = () => {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const signOutUser = () => {
+    signOut(auth).then(() => {
+      dispatch(logout());
+    });
+  };
   return (
     <nav>
       <div className="nav--left">
@@ -32,10 +45,10 @@ const Header = () => {
         <IconButton>
           <NotificationsIcon />
         </IconButton>
-        <Avatar />
+        <Avatar src={user?.photoURL} onClick={signOutUser} />
       </div>
     </nav>
   );
 };
 
-export default Header;
+export default Nav;

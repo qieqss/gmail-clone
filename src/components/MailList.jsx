@@ -93,29 +93,6 @@ const MailList = () => {
             time={new Date(timestamp?.seconds * 1000).toUTCString()}
           />
         ))}
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
-        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
       </div>
     </main>
   );

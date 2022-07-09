@@ -8,10 +8,30 @@ import SendMail from "./components/SendMail";
 import { useSelector } from "react-redux";
 import { selectSendMessageIsOpen } from "./features/mailSlice";
 import Login from "./pages/Login";
+import { login, selectUser } from "./features/userSlice";
+import { useDispatch } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { auth } from "./firebase";
 
 const App = () => {
-  
   const sendMessageIsOpen = useSelector(selectSendMessageIsOpen);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          login({
+            displayName: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+          })
+        );
+      }
+    });
+  }, []);
 
   return (
     <Router>
@@ -33,6 +53,6 @@ const App = () => {
       )}
     </Router>
   );
-}
+};
 
 export default App;

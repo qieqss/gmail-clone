@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
 }
 
 body {
@@ -51,6 +52,10 @@ nav {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid whitesmoke;
+}
+
+nav .MuiAvatar-img, nav .MuiAvatar-root {
+  cursor: pointer;
 }
 
 .nav--left {
@@ -238,10 +243,10 @@ MAIL LIST
   flex: 0.8;
   align-items: center;
   font-size: 13px;
+  padding: 0 16px;
 }
 
 .mail__row-message h4 {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 4px;
@@ -272,6 +277,13 @@ MAIL
 .mail {
   flex: 1;
   background-color: whitesmoke;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mail__list::-webkit-scrollbar {
+  display: none;
 }
 
 .mail__tools {
@@ -313,7 +325,7 @@ MAIL
 }
 
 .mail__message p {
-  padding: 8px;
+  padding: 16px;
   margin-right: 24px;
   overflow-wrap: break-word;
 }
@@ -397,4 +409,65 @@ SEND MAIL
   color: red;
   text-align: right;
   padding: 4px;
+}
+
+/* 
+
+LOGIN
+
+*/
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f2f2;
+  min-height: 100vh
+}
+
+.login__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__container img {
+  object-fit: contain;
+  margin: 56px 0;
+  height: 70px;
+}
+
+.login__container .MuiButton-root {
+  width: 100%;
+  min-width: 375px;
+}
+
+/* 
+
+MEDIA QUERIES
+
+*/
+
+@media (max-width: 1000px) {
+  .mail__row-time {
+    display: none;
+  }
+  .mail__row-message {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 570px) {
+  .mail__row-options {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .mail__row-title {
+    display: none;
+  }
+  .mail__row-message {
+    justify-content: center;
+  }
 }
