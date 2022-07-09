@@ -7,12 +7,17 @@ import "./index.css";
 import SendMail from "./components/SendMail";
 import { useSelector } from "react-redux";
 import { selectSendMessageIsOpen } from "./features/mailSlice";
+import Login from "./pages/Login";
 
-function App() {
+const App = () => {
+  
   const sendMessageIsOpen = useSelector(selectSendMessageIsOpen);
 
   return (
-      <Router>
+    <Router>
+      {!user ? (
+        <Login />
+      ) : (
         <div className="app">
           <Nav />
           <div className="app__body">
@@ -25,7 +30,8 @@ function App() {
 
           {sendMessageIsOpen && <SendMail />}
         </div>
-      </Router>
+      )}
+    </Router>
   );
 }
 

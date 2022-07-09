@@ -5,7 +5,7 @@ import React from "react";
 import { closeSendMessage } from "../features/mailSlice";
 import { useDispatch } from "react-redux";
 import { db } from "../firebase";
-import firebase from "firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const SendMail = () => {
   const {
@@ -17,17 +17,17 @@ const SendMail = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (formData) => {
-    console.log(formData);
-    db.collection("emails").add({
+    const add = {
       to: formData.to,
       subject: formData.subject,
       message: formData.message,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+      timestamp: serverTimestamp(),
+    };
+    addDoc(collection(db, "mails"), add);
 
-    dispatch(closeSendMessage())
+    dispatch(closeSendMessage());
   };
-
+  
   return (
     <div className="send__mail">
       <div className="send__mail--header">
@@ -37,7 +37,6 @@ const SendMail = () => {
           onClick={() => dispatch(closeSendMessage())}
         />
       </div>
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           placeholder="To"

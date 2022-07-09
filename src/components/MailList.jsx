@@ -6,14 +6,45 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import KeyboardHideIcon from "@mui/icons-material/KeyboardHide";
 import SettingsIcon from "@mui/icons-material/Settings";
-import InboxIcon from '@mui/icons-material/Inbox';
-import PeopleIcon from '@mui/icons-material/People';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import InboxIcon from "@mui/icons-material/Inbox";
+import PeopleIcon from "@mui/icons-material/People";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import React from "react";
 import Section from "./Section";
 import MailRow from "./MailRow";
+import { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { collection, orderBy, onSnapshot, query } from "firebase/firestore";
 
 const MailList = () => {
+  const [mails, setMails] = useState([]);
+
+  // useEffect(() => {
+  //   collection(db, "emails")
+  //     .orderBy("timestamp", "desc")
+  //     .onSnapshot((snapshot) =>
+  //       setMails(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       )
+  //     );
+  // }, []);
+
+  useEffect(
+    () =>
+      onSnapshot(
+        query(collection(db, "mails"), orderBy("timestamp", "desc")),
+        (snapshot) => {
+          setMails(
+            snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+          );
+        }
+      ),
+    []
+  );
+
   return (
     <main className="mail__list">
       <div className="mail__list-settings">
@@ -52,11 +83,39 @@ const MailList = () => {
       </div>
 
       <div className="mail__list--main">
-        <MailRow title="Twitch"
-        subject="Hey streamer"
-        description="This is a test"
-        time="10pm"
-        />
+        {mails.map(({ id, data: { to, subject, message, timestamp } }) => (
+          <MailRow
+            id={id}
+            key={id}
+            title={to}
+            subject={subject}
+            description={message}
+            time={new Date(timestamp?.seconds * 1000).toUTCString()}
+          />
+        ))}
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
+        <MailRow title="Title" subject="Subject" description="Message" time="Time" />
       </div>
     </main>
   );
